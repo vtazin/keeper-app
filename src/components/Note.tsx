@@ -1,7 +1,6 @@
 import React from "react";
 import DeleteIcon from '@material-ui/icons/Delete';
-import {NoteContent, NoteDeleteHandler} from './App';
-
+import {NoteContent, NoteDeleteHandler} from './Types';
 
 type NoteType = {
     id: number;

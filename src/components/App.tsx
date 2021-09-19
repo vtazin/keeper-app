@@ -3,19 +3,7 @@ import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
-
-
-export type NoteContent = {
-  title: string;
-  content: string;
-}
-export type NoteAddHandler={
-  onAdd: (value: NoteContent) => void;
-}
-export type NoteDeleteHandler={
-  onDelete: (id: number) => void;
-}
-
+import {NoteContent} from './Types';
 
 function App() {
   const [notes, setNotes] = useState<NoteContent[]>([]);
