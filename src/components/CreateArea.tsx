@@ -1,45 +1,7 @@
 import React, {ChangeEvent, FormEvent, useState} from "react";
-import AddIcon from "@material-ui/icons/Add";
-import {Box, Fab, makeStyles, TextareaAutosize, TextField, Zoom} from "@material-ui/core";
+import AddIcon from "@mui/icons-material/Add";
 import {NoteAddHandler} from './Types';
-
-
-const useStyles = makeStyles({
-    root: {
-        position: 'relative',
-        maxWidth: '480px',
-        margin: '30px auto 20px auto',
-        backgroundColor: '#fff',
-        padding: '15px',
-        borderRadius: '7px',
-        boxShadow: '0 1px 5px rgb(138, 137, 137)'
-    },
-    textArea: {
-        width: '100%',
-        border: 'none',
-        padding: '4px',
-        outline: 'none',
-        fontSize: '1.2em',
-        fontFamily: 'inherit',
-        resize: 'none'
-    },
-    submitButton: {
-        position: 'absolute',
-        right: '18px',
-        bottom: '-18px',
-        background: '#f5ba13',
-        color: '#fff',
-        border: 'none',
-        borderRadius: '50%',
-        width: '36px',
-        height: '36px',
-        boxShadow: '0 1px 3px rgba(0, 0, 0, 0.3)',
-        cursor: 'pointer',
-        outline: 'none'
-    }
-
-});
-
+import {Box, Fab, TextareaAutosize, TextField, Zoom} from '@mui/material';
 
 const CreateArea = (props: NoteAddHandler) => {
     const [isActive, setIsActive] = useState(false);
@@ -81,27 +43,70 @@ const CreateArea = (props: NoteAddHandler) => {
         event.preventDefault();
     }
 
-    const classes = useStyles();
+    // const classes = useStyles();
 
     return (
-        <Box className={classes.root} onClick={() => {
-            setIsActive(true);
+        <Box sx={{
+            flexShrink: 1, position: 'relative',
+            zIndex: 2,
+            maxWidth: '480px',
+            margin: '30px auto',
+            bgcolor: '#fff',
+            padding: '15px',
+            borderRadius: '7px',
+            boxShadow: '0 1px 5px rgb(138, 137, 137)'
         }}
         >
-            <TextField style={{display: isActive ? "block" : "none"}}
+            {isActive &&
+            <TextField style={{
+                width: '100%',
+                border: 'none',
+                padding: '4px',
+                outline: 'none',
+                fontSize: '1.2em',
+                fontFamily: 'inherit',
+                resize: 'none',
+            }}
+
                        onChange={titleChange}
                        value={note.title}
                        placeholder="Title"
             />
+            }
             <TextareaAutosize
-                className={classes.textArea}
+                style={{
+                    width: '100%',
+                    border: 'none',
+                    padding: '4px',
+                    fontSize: '1.2em',
+                    fontFamily: 'inherit',
+                    resize: 'none'
+                }}
+                onClick={() => {
+                    setIsActive(true);
+                }}
                 onChange={textChange}
                 value={note.content}
                 placeholder="Take a note..."
                 minRows={isActive ? 3 : 1}
             />
+
             <Zoom in={isActive}>
-                <Fab className={classes.submitButton} onClick={submitNote}>
+                <Fab sx={{
+                    position: 'absolute',
+                    right: '18px',
+                    bottom: '-18px',
+                    bgcolor: '#f5ba13',
+                    color: '#fff',
+                    border: 'none',
+                    borderRadius: '50%',
+                    width: '36px',
+                    height: '36px',
+                    boxShadow: '0 1px 3px rgba(0, 0, 0, 0.3)',
+                    cursor: 'pointer',
+                    outline: 'none'
+
+                }} onClick={submitNote}>
                     <AddIcon/>
                 </Fab>
             </Zoom>

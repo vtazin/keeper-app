@@ -1,6 +1,11 @@
 import React from "react";
-import DeleteIcon from '@material-ui/icons/Delete';
 import {NoteContent, NoteDeleteHandler} from './Types';
+import {Button, Card, CardActions, CardContent, CardHeader, ListItem} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+
+
+// .note {
+
 
 type NoteType = {
     id: number;
@@ -12,13 +17,35 @@ const Note = (props: NoteType) => {
     }
 
     return (
-        <div className="note">
-            <h1>{props.title}</h1>
-            <p>{props.content}</p>
-            <button onClick={handleClick}>
-                <DeleteIcon/>
-            </button>
-        </div>
+        <Card sx={{
+            borderRadius: '7px',
+            boxShadow: '0 2px 5px #ccc',
+            padding: '10px',
+            width: '240px',
+            margin: '16px',
+            float: 'left'
+        }}>
+            <CardContent sx={{
+                '& h1': {
+                    fontSize: '1.1em',
+                    mb: '6px'
+                },
+                '& p': {
+                    fontSize: '1.1em',
+                    mb: '10px'
+                }
+            }}>
+                <h1>{props.title}</h1>
+                <p>{props.content}</p>
+            </CardContent>
+            <CardActions>
+                <Button size={'medium'} variant={'text'} sx={{
+                    color: '#f5ba13',
+                }} onClick={handleClick}>
+                    <DeleteIcon/>
+                </Button>
+            </CardActions>
+        </Card>
     );
 };
 

@@ -1,45 +1,58 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import Header from "./Header";
 import Footer from "./Footer";
 import Note from "./Note";
 import CreateArea from "./CreateArea";
 import {NoteContent} from './Types';
 
+import testNotes from '../notes'
+import {AppBar, Box, List} from '@mui/material';
+
 function App() {
-  const [notes, setNotes] = useState<NoteContent[]>([]);
+    const [notes, setNotes] = useState<NoteContent[]>(testNotes);
 
-  function addNote(newNote:NoteContent) {
-    setNotes(prevNotes => {
-      return [...prevNotes, newNote];
-    });
-  }
+    function addNote(newNote: NoteContent) {
+        setNotes(prevNotes => {
+            return [...prevNotes, newNote];
+        });
+    }
 
-  function deleteNote(id:number) {
-    setNotes(prevNotes => {
-      return prevNotes.filter((noteItem, index) => {
-        return index !== id;
-      });
-    });
-  }
+    function deleteNote(id: number) {
+        setNotes(prevNotes => {
+            return prevNotes.filter((noteItem, index) => {
+                return index !== id;
+            });
+        });
+    }
 
-  return (
-    <div>
-      <Header />
-      <CreateArea onAdd={addNote} />
-      {notes.map((noteItem, index) => {
-        return (
-          <Note
-            key={index}
-            id={index}
-            title={noteItem.title}
-            content={noteItem.content}
-            onDelete={deleteNote}
-          />
-        );
-      })}
-      <Footer />
-    </div>
-  );
+    return (
+        <React.Fragment>
+            <AppBar position={'static'}>
+                <Header/>
+            </AppBar>
+            <Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc( 100vh - 104px)', padding: '0 10px'}}>
+                <CreateArea onAdd={addNote}/>
+                <Box sx={{
+                    overflow: 'auto', width: '100%',
+                }}>
+                    {
+                        notes.map((noteItem, index) => {
+                            return (
+                                <Note
+                                    key={index}
+                                    id={index}
+                                    title={noteItem.title}
+                                    content={noteItem.content}
+                                    onDelete={deleteNote}
+                                />
+                            );
+                        })
+                    }
+                </Box>
+            </Box>
+            <Footer/>
+        </React.Fragment>
+    );
 }
 
 export default App;
