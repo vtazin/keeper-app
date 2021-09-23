@@ -5,11 +5,10 @@ import Note from "./Note";
 import CreateArea from "./CreateArea";
 import {NoteContent} from './Types';
 
-import testNotes from '../notes'
-import {AppBar, Box, List} from '@mui/material';
+import {AppBar, Box} from '@mui/material';
 
 function App() {
-    const [notes, setNotes] = useState<NoteContent[]>(testNotes);
+    const [notes, setNotes] = useState<NoteContent[]>([]);
 
     function addNote(newNote: NoteContent) {
         setNotes(prevNotes => {
