@@ -33,7 +33,7 @@ function App() {
             <Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc( 100vh - 104px)', padding: '0 10px'}}>
                 <CreateArea onAdd={addNote}/>
                 <Box sx={{
-                    overflow: 'auto', width: '100%',
+                    overflow: 'auto', width: '100%', display: 'flex', justifyContent: 'center', flexWrap:'wrap',
                 }}>
                     {
                         notes.map((noteItem, index) => {

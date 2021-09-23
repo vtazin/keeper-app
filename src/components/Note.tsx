@@ -21,13 +21,14 @@ const Note = (props: NoteType) => {
             borderRadius: '7px',
             boxShadow: '0 2px 5px #ccc',
             padding: '10px',
-            width: '240px',
+            maxWidth: '300px',
             margin: '16px',
-            float: 'left'
+            float: 'left',
+            height:'fit-content'
         }}>
             <CardContent sx={{
                 '& h1': {
-                    fontSize: '1.1em',
+                    fontSize: '1.4em',
                     mb: '6px'
                 },
                 '& p': {
@@ -38,13 +39,11 @@ const Note = (props: NoteType) => {
                 <h1>{props.title}</h1>
                 <p>{props.content}</p>
             </CardContent>
-            <CardActions>
-                <Button size={'medium'} variant={'text'} sx={{
-                    color: '#f5ba13',
-                }} onClick={handleClick}>
-                    <DeleteIcon/>
-                </Button>
-            </CardActions>
+            <Button size={'medium'} variant={'text'} sx={{
+                color: '#f5ba13', float:'right',
+            }} onClick={handleClick}>
+                <DeleteIcon/>
+            </Button>
         </Card>
     );
 };

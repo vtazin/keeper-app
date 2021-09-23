@@ -49,7 +49,7 @@ const CreateArea = (props: NoteAddHandler) => {
         <Box sx={{
             flexShrink: 1, position: 'relative',
             zIndex: 2,
-            maxWidth: '480px',
+            maxWidth: '300px',
             margin: '30px auto',
             bgcolor: '#fff',
             padding: '15px',
@@ -58,29 +58,28 @@ const CreateArea = (props: NoteAddHandler) => {
         }}
         >
             {isActive &&
-            <TextField style={{
+            <TextField sx={{
                 width: '100%',
-                border: 'none',
                 padding: '4px',
-                outline: 'none',
                 fontSize: '1.2em',
                 fontFamily: 'inherit',
                 resize: 'none',
             }}
-
                        onChange={titleChange}
                        value={note.title}
                        placeholder="Title"
             />
             }
             <TextareaAutosize
+
                 style={{
                     width: '100%',
                     border: 'none',
+                    outline: 'none',
                     padding: '4px',
                     fontSize: '1.2em',
                     fontFamily: 'inherit',
-                    resize: 'none'
+                    resize: 'none',
                 }}
                 onClick={() => {
                     setIsActive(true);
