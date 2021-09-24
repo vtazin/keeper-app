@@ -8,20 +8,33 @@ import {NoteContent} from './Types';
 import {AppBar, Box} from '@mui/material';
 
 function App() {
-    const [notes, setNotes] = useState<NoteContent[]>([]);
+
+    let initNotes = [];
+    const initNotesJSON = window.localStorage.getItem('notes');
+    if (initNotesJSON) {
+        initNotes = JSON.parse(initNotesJSON).notes;
+    }
+
+    const [notes, setNotes] = useState<NoteContent[]>(initNotes);
 
     function addNote(newNote: NoteContent) {
         setNotes(prevNotes => {
-            return [...prevNotes, newNote];
+            const result = [...prevNotes, newNote];
+            window.localStorage.setItem('notes', JSON.stringify({notes: result}));
+            return result;
         });
+
     }
 
     function deleteNote(id: number) {
         setNotes(prevNotes => {
-            return prevNotes.filter((noteItem, index) => {
+            const result = prevNotes.filter((noteItem, index) => {
                 return index !== id;
             });
+            window.localStorage.setItem('notes', JSON.stringify({notes: result}));
+            return result;
         });
+
     }
 
     return (
@@ -32,7 +45,7 @@ function App() {
             <Box sx={{display: 'flex', flexDirection: 'column', maxHeight: 'calc( 100vh - 104px)', padding: '0 10px'}}>
                 <CreateArea onAdd={addNote}/>
                 <Box sx={{
-                    overflow: 'auto', width: '100%', display: 'flex', justifyContent: 'center', flexWrap:'wrap',
+                    overflow: 'auto', width: '100%', display: 'flex', justifyContent: 'center', flexWrap: 'wrap',
                 }}>
                     {
                         notes.map((noteItem, index) => {
